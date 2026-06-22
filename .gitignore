@@ -1,0 +1,16 @@
+# Virtual environment - huge, and everyone regenerates their own
+venv/
+env/
+
+# Python cache files - auto-generated, not source code
+__pycache__/
+*.pyc
+
+# Database - your local dev data, not meant to be shared/tracked
+db.sqlite3
+
+# Environment variables / secrets if you ever add a .env file
+.env
+
+# OS junk
+.DS_Store

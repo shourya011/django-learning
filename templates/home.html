@@ -1,4 +1,10 @@
 <h1> Hellp Everyone im in the html file</h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title of Movie">
+    <input type="number" name="rating" placeholder="Rate out of 10">
+    <button type="submit">Add Movie</button>
+</form>
 <h2> Name of Movies with their rating</h2>
 {% for i in movies %}
     {{i.title}} 

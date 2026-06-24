@@ -23,4 +23,5 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('hello/<str:name>/',views.greet),
     path('delete/<int:movie_id>/', views.delete_movie, name='delete_movie'),
+    path('edit/<int:movie_id>/',views.edit_movie,name='edit_movie'),
 ]

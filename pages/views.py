@@ -33,3 +33,17 @@ def greet(request,name):
 def delete_movie(request,movie_id):
     get_object_or_404(Movie, id=movie_id).delete()
     return redirect('home')
+
+def edit_movie(request,movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    if request.method == "POST":
+        movie.title = request.POST.get('title')
+        movie.rating = int(request.POST.get('rating'))
+        movie.save()
+        return redirect('home')
+    else:
+        context = {
+            'movie': movie,
+        }
+        return render(request,'edit.html',context)
+

@@ -7,7 +7,10 @@
 </form>
 <h2> Name of Movies with their rating</h2>
 {% for i in movies %}
-    {{i.title}} 
-    {{i.rating}}
+    {{i.title}} + {{i.rating}}
+    <form method="POST" action="{% url 'delete_movie' i.id %}" style="display:inline">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
     <br>
 {% endfor %}

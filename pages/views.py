@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect,get_object_or_404
 from pages.models import Movie
 
 # Create your views here.
@@ -29,3 +29,7 @@ def home(request):
 
 def greet(request,name):
     return HttpResponse(f"Hello {name}")
+
+def delete_movie(request,movie_id):
+    get_object_or_404(Movie, id=movie_id).delete()
+    return redirect('home')

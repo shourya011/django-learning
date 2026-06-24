@@ -35,12 +35,15 @@ def delete_movie(request,movie_id):
     return redirect('home')
 
 def edit_movie(request,movie_id):
+    #fetch
     movie = get_object_or_404(Movie, id=movie_id)
+    #if POST
     if request.method == "POST":
         movie.title = request.POST.get('title')
         movie.rating = int(request.POST.get('rating'))
         movie.save()
         return redirect('home')
+    #if GET
     else:
         context = {
             'movie': movie,

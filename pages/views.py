@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect,get_object_or_404
-from pages.models import Movie
+from pages.models import Movie,Genre
 
 # Create your views here.
 # def home(request):
@@ -16,13 +16,19 @@ from pages.models import Movie
 
 def home(request):
     if request.method == "POST":
-        title = Movie.objects.create(title=request.POST.get('title'),rating=int(request.POST.get('rating')))
-        # Post/Redirect/Get
+        genre_id = request.POST.get('genre')
+        genre_obj = get_object_or_404(Genre, id=genre_id)
+        title = Movie.objects.create(
+            title=request.POST.get('title'),
+            rating=int(request.POST.get('rating')),
+            genre=genre_obj
+        )
         return redirect('home')
-        
+    genre = Genre.objects.all()
     movies = Movie.objects.all()
     context = {
         'movies': movies,
+        'genres' : genres,
     }
     return render(request,'home.html',context)
     

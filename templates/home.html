@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+
     <h1> Hellp Everyone im in the html file</h1>
         <form method="POST">
             {% csrf_token %}
@@ -20,10 +21,17 @@
             </select>
             <button type="submit">Add Movie</button>
         </form>
+
         <h2>Filter by genre:</h2>
         {% for g in genres %}
             <a href="?genre={{ g.name }}">{{ g.name }}</a>
         {% endfor %}
+
+        <form method="GET">
+            <input type="text" name="q" placeholder="Search movies...">
+            <button type="submit">Search</button>
+        </form>
+
         <h2> Name of Movies with their rating</h2>
         {% for i in movies %}
         <div class="movie-item">

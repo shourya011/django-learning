@@ -30,6 +30,10 @@ def home(request):
         selected_genre = request.GET.get('genre')
         movies = Movie.objects.filter(genre__name=selected_genre)
 
+    if request.GET.get('q'):
+        movie_name = request.GET.get('q')
+        movies = movies.filter(title__icontains=movie_name)
+
     context = {
         'movies': movies,
         'genres' : genres,

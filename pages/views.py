@@ -24,8 +24,12 @@ def home(request):
             genre=genre_obj
         )
         return redirect('home')
-    genre = Genre.objects.all()
+    genres = Genre.objects.all()
     movies = Movie.objects.all()
+    if request.GET.get('genre'):
+        selected_genre = request.GET.get('genre')
+        movies = Movie.objects.filter(genre__name=selected_genre)
+
     context = {
         'movies': movies,
         'genres' : genres,

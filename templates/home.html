@@ -30,22 +30,26 @@
         {% for g in genres %}
             <a href="?genre={{ g.name }}">{{ g.name }}</a>
         {% endfor %}
-
+        <a href="{% url 'home' %}">Clear filters</a>
         <form method="GET">
             <input type="text" name="q" placeholder="Search movies...">
             <button type="submit">Search</button>
         </form>
 
         <h2> Name of Movies with their rating</h2>
-        {% for i in movies %}
-        <div class="movie-item">
-            {{i.title}} + {{i.rating}} + {{i.genre}}
-            <form method="POST" action="{% url 'delete_movie' i.id %}" style="display:inline">
-                {% csrf_token %}
-                <button type="submit">Delete</button>
-            </form>
-            <a href="{% url 'edit_movie' i.id %}" style="display:inline">Edit</a>
-        </div>
-    {% endfor %}
-</body>
+        {% if movies %}
+            {% for i in movies %}
+            <div class="movie-item">
+                {{i.title}} + {{i.rating}} + {{i.genre}}
+                <form method="POST" action="{% url 'delete_movie' i.id %}" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this movie?')">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="{% url 'edit_movie' i.id %}" style="display:inline">Edit</a>
+            </div>
+        {% endfor %}
+        {% else %}
+            <p>No movies found.</p>
+        {% endif %}
+    </body>
 </html>

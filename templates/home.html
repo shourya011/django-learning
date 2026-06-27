@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <form method="POST" action="{% url 'logout' %}" style="display:inline">
+        {% csrf_token %}
+        <button type="submit">Log out</button>
+    </form>
     {% if messages %}
         {% for message in messages %}
             <p>{{ message }}</p>

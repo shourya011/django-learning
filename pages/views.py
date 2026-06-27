@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect,get_object_or_404
 from pages.models import Movie,Genre
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # def home(request):
@@ -14,7 +15,7 @@ from django.contrib import messages
     #     'movies': movies,
     # }
     # return render(request,'home.html',context)
-
+@login_required
 def home(request):
     if request.method == "POST":
         title_value = request.POST.get('title')

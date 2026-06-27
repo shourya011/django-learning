@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from pages import views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,6 @@ urlpatterns = [
     path('hello/<str:name>/',views.greet),
     path('delete/<int:movie_id>/', views.delete_movie, name='delete_movie'),
     path('edit/<int:movie_id>/',views.edit_movie,name='edit_movie'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='logged_out.html'), name='logout'),
 ]

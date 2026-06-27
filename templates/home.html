@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
     <h1> Hellp Everyone im in the html file</h1>
         <form method="POST">
             {% csrf_token %}

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect,get_object_or_404
 from pages.models import Movie,Genre
+from django.contrib import messages
 
 # Create your views here.
 # def home(request):
@@ -16,14 +17,22 @@ from pages.models import Movie,Genre
 
 def home(request):
     if request.method == "POST":
+        title_value = request.POST.get('title')
+        rating_value = request.POST.get('rating')
         genre_id = request.POST.get('genre')
         genre_obj = get_object_or_404(Genre, id=genre_id)
-        title = Movie.objects.create(
-            title=request.POST.get('title'),
-            rating=int(request.POST.get('rating')),
-            genre=genre_obj
-        )
-        return redirect('home')
+        if title_value and rating_value:
+            Movie.objects.create(
+                title=title_value,
+                rating=int(rating_value),
+                genre=genre_obj
+            )
+            messages.success(request, "Movie added!")
+            return redirect('home')
+        else:
+            messages.error(request, "Title and rating are required.")
+            return redirect('home')
+
     genres = Genre.objects.all()
     movies = Movie.objects.all()
     if request.GET.get('genre'):
@@ -36,9 +45,9 @@ def home(request):
 
     context = {
         'movies': movies,
-        'genres' : genres,
+        'genres': genres,
     }
-    return render(request,'home.html',context)
+    return render(request, 'home.html', context)
     
 
 def greet(request,name):

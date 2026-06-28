@@ -56,25 +56,25 @@ def home(request):
 def greet(request,name):
     return HttpResponse(f"Hello {name}")
 
-def delete_movie(request,movie_id):
-    get_object_or_404(Movie, id=movie_id).delete()
+@login_required
+def delete_movie(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id, user=request.user)
+    movie.delete()
     return redirect('home')
 
-def edit_movie(request,movie_id):
-    #fetch
-    movie = get_object_or_404(Movie, id=movie_id)
-    #if POST
+@login_required
+def edit_movie(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id, user=request.user)
     if request.method == "POST":
         movie.title = request.POST.get('title')
         movie.rating = int(request.POST.get('rating'))
         movie.save()
         return redirect('home')
-    #if GET
     else:
         context = {
             'movie': movie,
         }
-        return render(request,'edit.html',context)
+        return render(request, 'edit.html', context)
 
 
 def signup(request):

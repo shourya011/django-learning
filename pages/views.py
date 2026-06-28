@@ -4,6 +4,7 @@ from django.shortcuts import redirect,get_object_or_404
 from pages.models import Movie,Genre
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 # def home(request):
@@ -74,3 +75,15 @@ def edit_movie(request,movie_id):
         }
         return render(request,'edit.html',context)
 
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        else:
+            return render(request, 'signup.html', {'form': form})
+    else:
+        form = UserCreationForm()
+        return render(request, 'signup.html', {'form': form})

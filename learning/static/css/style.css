@@ -45,3 +45,24 @@ button:hover {
     justify-content: space-between;
     align-items: center;
 }
+
+.signup-form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.signup-form input {
+    margin-top: 4px;
+}
+
+.signup-form ul {
+    font-size: 0.85em;
+    color: #666;
+    padding-left: 18px;
+    margin: 4px 0 12px;
+}
+
+.signup-form {
+    display: block;
+}

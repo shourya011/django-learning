@@ -27,7 +27,8 @@ def home(request):
             Movie.objects.create(
                 title=title_value,
                 rating=int(rating_value),
-                genre=genre_obj
+                genre=genre_obj,
+                user=request.user
             )
             messages.success(request, "Movie added!")
             return redirect('home')
@@ -36,10 +37,10 @@ def home(request):
             return redirect('home')
 
     genres = Genre.objects.all()
-    movies = Movie.objects.all()
+    movies = Movie.objects.filter(user=request.user)
     if request.GET.get('genre'):
         selected_genre = request.GET.get('genre')
-        movies = Movie.objects.filter(genre__name=selected_genre)
+        movies = movies.filter(genre__name=selected_genre)
 
     if request.GET.get('q'):
         movie_name = request.GET.get('q')

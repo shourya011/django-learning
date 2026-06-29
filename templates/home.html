@@ -17,7 +17,7 @@
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
-    <h1> Hellp Everyone im in the html file</h1>
+    <h1> Hello Everyone im in the html file</h1>
         <form method="POST">
             {% csrf_token %}
             <input type="text" name="title" placeholder="Title of Movie">
@@ -29,7 +29,6 @@
             </select>
             <button type="submit">Add Movie</button>
         </form>
-
         <h2>Filter by genre:</h2>
         {% for g in genres %}
             <a href="?genre={{ g.name }}">{{ g.name }}</a>

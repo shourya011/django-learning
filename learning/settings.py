@@ -129,5 +129,5 @@ STORAGES = {
     },
 }
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'landing'
 LOGIN_REDIRECT_URL = 'home'

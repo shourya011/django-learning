@@ -52,6 +52,8 @@ def home(request):
     }
     return render(request, 'home.html', context)
     
+def landing(request):
+    return render(request, 'landing.html')
 
 def greet(request,name):
     return HttpResponse(f"Hello {name}")

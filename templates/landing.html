@@ -1,0 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<h1>Welcome to MovieList</h1>
+<p>Track and rate your favorite movies.</p>
+<a href="{% url 'login' %}">Log in</a>
+<a href="{% url 'signup' %}">Sign up</a>

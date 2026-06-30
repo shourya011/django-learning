@@ -12,6 +12,7 @@ class Movie(models.Model):
     rating = models.IntegerField()
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    photo = models.ImageField(upload_to='movie_photos/', null=True, blank=True)
 
     def __str__(self):
         return self.title

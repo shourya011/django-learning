@@ -23,12 +23,14 @@ def home(request):
         rating_value = request.POST.get('rating')
         genre_id = request.POST.get('genre')
         genre_obj = get_object_or_404(Genre, id=genre_id)
+        photo_value = request.FILES.get('photo')
         if title_value and rating_value:
             Movie.objects.create(
                 title=title_value,
                 rating=int(rating_value),
                 genre=genre_obj,
-                user=request.user
+                user=request.user,
+                photo=photo_value
             )
             messages.success(request, "Movie added!")
             return redirect('home')

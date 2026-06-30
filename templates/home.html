@@ -18,7 +18,7 @@
         {% endfor %}
     {% endif %}
     <h1> Hello Everyone im in the html file</h1>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" name="title" placeholder="Title of Movie">
             <input type="number" name="rating" placeholder="Rate out of 10">
@@ -27,6 +27,7 @@
                 <option value="{{ g.id }}">{{ g.name }}</option>
             {% endfor %}
             </select>
+            <input type="file" name="photo">
             <button type="submit">Add Movie</button>
         </form>
         <h2>Filter by genre:</h2>
@@ -49,6 +50,9 @@
                     <button type="submit">Delete</button>
                 </form>
                 <a href="{% url 'edit_movie' i.id %}" style="display:inline">Edit</a>
+                {% if i.photo %}
+                    <img src="{{ i.photo.url }}" alt="{{ i.title }}" width="100">
+                {% endif %}
             </div>
         {% endfor %}
         {% else %}
